@@ -1,0 +1,40 @@
+﻿.idea
+machine
+venv-bck
+
+# Other object files
+*.dat
+# *.xlsx
+# *.docx
+# *.csv
+# *.json
+
+*.bmp
+# *.png
+# *.jpg
+# *.gif
+*.ico
+
+*.spec
+*.pyc
+*.svg
+*.exe
+
+# pyinstaller-F & pycharm
+__pycache__
+build
+dist
+.idea
+
+# vscode
+.vscode
+
+# Django migrations
+# migrations
+
+
+# BigFile, 改表的时候需要上传一次
+# db.sqlite3
+
+# bat文件，用于启动服务
+*.bat
