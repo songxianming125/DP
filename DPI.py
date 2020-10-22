@@ -8,6 +8,7 @@ import DataDasN
 import InfChnl
 import os
 import re
+import sys
 import struct as st
 import scipy.io as sio
 import numpy as np
@@ -673,7 +674,10 @@ def getTreeName(channelName):
 
 
     if mode == 2:
-        treeChnlFile = os.path.join(os.getcwd(), 'machine\\exl50.mat')
+        if sys.platform in ['linux', 'darwin']:
+            treeChnlFile = os.path.join(os.getcwd(), 'machine/exl50.mat')
+        else:
+            treeChnlFile = os.path.join(os.getcwd(), 'machine\\exl50.mat')
     elif mode == 3:
         treeChnlFile = os.path.join(os.getcwd(), 'machine\\east.mat')
 
