@@ -679,8 +679,11 @@ def getTreeName(channelName):
         else:
             treeChnlFile = os.path.join(os.getcwd(), 'machine\\exl50.mat')
     elif mode == 3:
-        treeChnlFile = os.path.join(os.getcwd(), 'machine\\east.mat')
-
+           if sys.platform in ['linux', 'darwin']:
+            treeChnlFile = os.path.join(os.getcwd(), 'machine/east.mat')
+        else:
+            treeChnlFile = os.path.join(os.getcwd(), 'machine\\east.mat')
+    
 
     # if not (os.path.exists(treeChnlFile)):
 
