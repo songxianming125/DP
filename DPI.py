@@ -15,12 +15,12 @@ import numpy as np
 from datetime import datetime
 import matplotlib.pyplot as plt
 
-__all__ = ["exl50db", "hl2adb", "eastdb", "getChannelsInTree", "sct", "sctAD", "mode", "getDateTime"]
+__all__ = ["exl50db", "hl2adb", "eastdb", "getChannelsInTree", "sct", "sctAD", "getDateTime"]
 
 # the DP subroutine
 # the default value for DP
 
-mode = 2  # 0=driver mode   0=hl2a,1=local, 2=exl50,3=east,4=hl2m
+mode = 4  # 0=driver mode   0=hl2a,1=local, 2=exl50,3=east,4=hl2m
 myStart = 0  # time window start
 myEnd = 10000  # time window end in second
 myFrq = 1  # interpolation or frequency
@@ -388,12 +388,25 @@ def getInf(shotNumber, channelName, *args):
 
 
 def hl2adb(shotNumber, channelName, *args):
+    global myStart, myEnd, myFrq
+    mySys = getSystemName(channelName)
+
     if len(args) == 1:
         mySys = args[0]
+    elif len(args) == 2:
+        myStart = args[0]
+        myEnd = args[1]
+    elif len(args) == 3:
+        myStart = args[0]
+        myEnd = args[1]
+        myFrq = args[2]
     elif len(args) == 4:
+        myStart = args[0]
+        myEnd = args[1]
+        myFrq = args[2]
         mySys = args[3]
     else:
-        mySys = getSystemName(channelName)
+        pass
 
     InfFileName = getInfFileName(shotNumber, mySys)
     infchs = InfChnl.InfChnls(InfFileName)
@@ -679,7 +692,7 @@ def getTreeName(channelName):
         else:
             treeChnlFile = os.path.join(os.getcwd(), 'machine\\exl50.mat')
     elif mode == 3:
-           if sys.platform in ['linux', 'darwin']:
+        if sys.platform in ['linux', 'darwin']:
             treeChnlFile = os.path.join(os.getcwd(), 'machine/east.mat')
         else:
             treeChnlFile = os.path.join(os.getcwd(), 'machine\\east.mat')
